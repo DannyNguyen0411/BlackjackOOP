@@ -13,11 +13,8 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('name', 45);
+            $table->mediumText('description')->charset('utf8mb4')->collation('utf8mb4_general_ci');
             $table->timestamps();
         });
     }
