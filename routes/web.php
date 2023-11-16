@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\ProjectController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +19,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
+
+
+
+Route::get('/admin', function() {
+    return view('layouts/layoutadmins');
+})->middleware(['auth', 'verified'])->name('admin');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
