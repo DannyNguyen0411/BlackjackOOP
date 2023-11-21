@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Http\Requests\ProjectStoreRequest;
+use App\Http\Requests\ProjectUpdateRequest;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 
@@ -25,15 +27,20 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.projects.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProjectStoreRequest $request)
     {
-        //
+        $category = new Project();
+        $category->name = $request->name;
+        $category->description = $request->description;
+        $category->save();
+
+        return to_route('projects.index')->with("status", "Gebruiker toegevoegd!");
     }
 
     /**
@@ -41,7 +48,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return view('admin.projects.show', compact('project'));
     }
 
     /**
@@ -49,15 +56,27 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Project $project)
+    public function update(ProjectUpdateRequest $request, Project $project)
     {
-        //
+        $project->name = $request->name;
+        $project->description = $request->description;
+        $project->save();
+
+        return to_route('projects.index')->with("status", "User changed!");
+    }
+
+    /**
+     *  Show the form for deleting the specified resource.
+     */
+    public function delete(Project $project)
+    {
+        return view('admin.projects.delete', compact('project'));
     }
 
     /**
@@ -65,6 +84,8 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        return to_route('projects.index')->with("status", "User deleted!");
     }
 }
