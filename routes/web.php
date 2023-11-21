@@ -31,6 +31,8 @@ Route::get('/admin', function() {
     return view('layouts/layoutadmins');
 })->middleware(['auth', 'verified'])->name('admin');
 
+Route::get('admin/project/{project}/delete', [Admin\ProjectController::class, 'delete'])->name('projects.delete');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

@@ -1,4 +1,4 @@
-@extends('layouts.home')
+@extends('layouts.layoutadmins')
 
 @section('topmenu')
     <div class="card">
