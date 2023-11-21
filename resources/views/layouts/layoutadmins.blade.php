@@ -402,7 +402,7 @@
                 <!-- end link -->
 
                 <!-- link -->
-                <a href="{{ __('admin') }}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
+                <a href="{{ __('admin/projects') }}" class="mb-3 capitalize font-medium text-sm hover:text-teal-600 transition ease-in-out duration-500">
                     Dashboard
                 </a>
                 <!-- end link -->

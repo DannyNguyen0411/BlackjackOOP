@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin as Admin;
+
 
 
 /*
@@ -22,6 +24,7 @@ Route::get('/', function () {
 
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
 
+Route::resource('admin/projects', Admin\ProjectController::class);
 
 
 Route::get('/admin', function() {
