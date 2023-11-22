@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Open as Open;
 use App\Http\Controllers\Admin as Admin;
 
 
@@ -26,12 +27,13 @@ Route::get('/projects', [ProjectController::class, 'index'])->name('projects.ind
 
 Route::resource('admin/projects', Admin\ProjectController::class);
 
-
 Route::get('/admin', function() {
     return view('layouts/layoutadmins');
 })->middleware(['auth', 'verified'])->name('admin');
 
 Route::get('admin/project/{project}/delete', [Admin\ProjectController::class, 'delete'])->name('projects.delete');
+
+Route::get('projects', [Open\ProjectController::class, 'index'])->name('open.projects.index');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

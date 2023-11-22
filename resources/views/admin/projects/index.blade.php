@@ -44,7 +44,7 @@
                         <th class="px-4 py-3">Details</th>
                         <th class="px-4 py-3">Edit</th>
                         <th class="px-4 py-3">Delete</th>
-                        <<th class="px-4 py-3">Description</th>
+                        <th class="px-4 py-3">Description</th>
                     </tr>
                     </thead>
                     <tbody class="bg-white divide-y">
