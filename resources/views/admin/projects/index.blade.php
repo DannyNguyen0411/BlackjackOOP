@@ -62,6 +62,7 @@
                                 </div>
                             </td>
                             <td>
+                                @can('delete project')
                                 <div class="flex items-center space-x-4 text-sm">
                                     <a href="{{ route('projects.delete', ['project' => $project->id]) }}">
                                         <button class="flex items-center justify-between px-2 py-2 text-sm font-medium leading-5 text-purple-600
@@ -81,6 +82,7 @@
                                                     </g>
                                                 </g>
                                             </svg></button></a>
+                                    @endcan
                                     <td class="px-4 py-3 text-sm">{{ $project->description }}</td>
                                 </div>
                             </td>

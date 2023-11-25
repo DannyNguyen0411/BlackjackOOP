@@ -19,21 +19,31 @@ use App\Http\Controllers\Admin as Admin;
 |
 */
 
-Route::get('/', function () {
+//For adding permission for each role and only access able for the role
+Route::group(['middleware' => ['role:teacher|admin|student']], function (){
+    Route::get('admin/project/{project}/delete', [Admin\ProjectController::class, 'delete'])->name('projects.delete');
+    Route::resource('admin/projects', Admin\ProjectController::class);
+
+//    Admin Dashboard
+    Route::get('/admin', function() {
+        return view('layouts/layoutadmins');
+    })->middleware(['auth', 'verified'])->name('admin');
+});
+
+//Documentation
+Route::get('/document', function () {
     return view('welcome');
 });
 
+//StartPage
+Route::get('/', [Open\ProjectController::class, 'index'])->name('open.projects.index');
+
 Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
 
-Route::resource('admin/projects', Admin\ProjectController::class);
-
-Route::get('/admin', function() {
-    return view('layouts/layoutadmins');
-})->middleware(['auth', 'verified'])->name('admin');
-
-Route::get('admin/project/{project}/delete', [Admin\ProjectController::class, 'delete'])->name('projects.delete');
-
 Route::get('projects', [Open\ProjectController::class, 'index'])->name('open.projects.index');
+
+Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

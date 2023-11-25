@@ -7,7 +7,7 @@
                 <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
                     <div class="sm:block sm:ml-6">
                         <div class="flex space-x-4">
-                            <a href="{{ route('projects.index') }}" class="text-gray-800 x-3 py-2 rounded-md text-sm font-medium" aria-current="page">Overzicht Categorie</a>
+                            <a href="{{ route('projects.index') }}" class="text-gray-800 px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Overzicht Categorie</a>
                             <a href="{{ route('projects.create') }}" class="text-gray-800 hover:text-teal-600 transition ease-in-out duration-500 px-3 py-2 rounder-md text-sm font-medium">Categorie Toevoegen</a>
                         </div>
                     </div>

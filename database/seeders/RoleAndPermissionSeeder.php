@@ -23,10 +23,12 @@ class RoleAndPermissionSeeder extends Seeder
         Permission::create(['name' => 'edit project']);
         Permission::create(['name' => 'delete project']);
 
-        $student = Role::create(['name' => 'student']);
+        $student = Role::create(['name' => 'student'])
+            ->givePermissionTo(['index project', 'show project', 'create project', 'edit project']);
+
 
         $teacher = Role::create(['name' => 'teacher'])
-        ->givePermissionTo(['index project', 'show project', 'create project', 'edit project']);
+        ->givePermissionTo(Permission::all());
 
         $admin = Role::create(['name' => 'admin'])
             ->givePermissionTo(Permission::all());

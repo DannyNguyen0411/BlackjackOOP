@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
 
     <title>Laravel 10</title>
 
@@ -25,31 +26,45 @@
                 @endif
                 <a href="{{ route('login') }}" class="inline-block no-underline bg-black text-white text-sm py-2 px-3">Login</a>
             @else
-                <h1 class="text-sm text-gray-800 font-semibold m-0 p-0 leading-none">{{ Auth::user()->name }}</h1>
-                <i class="fad fa-chevron-down ml-2 text-xs leading-none"></i>
-
-                <button class="hidden fixed top-0 left-0 z-10 w-full h-full menu-overflow"></button>
-
-                <div class="text-gray-500 menu hidden md:mt-10 md:w-full rounded bg-white shadow-md absolute z-20 right 0 w-40 mt-5 py-2 animated faster">
-                    <a href="#" class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out">
-                        <i class="fad fa-user-edit text-xs mr-1"></i>edit my profile
-                    </a>
-                    <a href="#" class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out">
-                        <i class="fad fa-inbox-in text-xs mr-1"></i>my inbox
-                    </a>
-                    <a href="#" class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out">
-                        <i class="fad fa-badge-check text-xs mr-1"></i>tasks
-                    </a>
-                    <a href="#" class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white hover:bg-gray-200 hover:text-gray-900 transition-all duration-300 ease-in-out">
-                        <i class="fad fa-comment-alt-dots text-xs mr-1"></i>chats
-                    </a>
-                    <hr>
-                    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="px-4 py-2 block capitalize font-medium text-sm tracking-wide bg-white">
-                        <i class="fad fa-user-times text-xs mr-1"></i>log ot
-                    </a>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="">
-                        @csrf
-                    </form>
+               <div class="w-full text-gray-700 bg-white">
+                   <div x-data="{ open: false} class=flex flex-col max-w-screen-xl px-4 mx-auto md:items-center md:justify-between md:flex-row md:px-6 lg:px-8">
+                       <nav :class="{ 'flex': open, 'hidden': !open}" class="flex-col flex-grow pb-4 md:pb-8 hidden md:flex md:justify-and md:flex-row">
+                           <div @click.away="open = false" class="relative" x-data="{open: false}">
+                                <button @click="open = !open" class="flex flex-row items-center w-full px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent dark-mode:focus:text">
+                                    <div class="w-8 h-8 overflow-hidden rounded full inline-block">
+                                        <img class="w-full h-full obejct-cover" src="{{ asset('img/user.svg') }}">
+                                    </div>
+                                    <span class="text-center align-text-bottom w-16 h-8 overflow-hidden inline-block">{{ Auth::user()->name }}</span>
+                                    <svg fill="currentColor" viewBox="0 0 20 20" :class="{'rotate-180': open, 'rotate-0': !open}" class="inline-block w-4 h-4 mt-1 transition-transform duration-200 transform md:-mt-1"></svg>
+                                </button>
+                               <div x-show="open"
+                                    x-transition:enter="transition ease-out duration-100"
+                                    x-transition:enter-start="transform opacity-0 scale-95"
+                                    x-transition:enter-end="transform opacity-100 scale-100"
+                                    x-transition:leave="transition ease-in duration-75"
+                                    @click.away="open = false">
+                                   <div class="px-2 py-2 bg-white rounded-md shadow dark-mode:bg-gray-800">
+                                       <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none" href="#">Edit My Profile</a>
+                                       <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none" href="#">My Inbox</a>
+                                       <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none" href="#">Tasks</a>
+                                       <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none" href="#">Chats</a>
+{{--                                       @hasanyrole('teacher|admin|student')--}}
+                                       <a class="block px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg md:mt-0 hover:text-gray-900 hover:bg-gray-200 focus:bg-gray-200 focus:outline-none" href="{{ route('projects.index') }}">Admin</a>
+{{--                                       @endhasanyrole--}}
+                                       <hr>
+                                       <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="px-4 py-2 capitalize font-medium text-sm tracking-wide">
+                                           <i class="fad fa-user-times text-xs mr-1">
+                                               Log Out
+                                           </i>
+                                       </a>
+                                       <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                           @csrf
+                                       </form>
+                                   </div>
+                               </div>
+                           </div>
+                       </nav>
+                   </div>
                 </div>
             @endguest
         </div>
