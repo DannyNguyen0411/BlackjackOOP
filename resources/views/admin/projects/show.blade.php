@@ -28,8 +28,10 @@
         {{--        content--}}
         <div class="py-4 px-6">
             <h2 class="text-lg font-semibold text-gray-600">Projects Details</h2>
-            <p class="py-2 text-lg text-gray-700">Name: {{ $project->name}}</p>
-            <p class="py-2 text-lg text-gray-700">Description: {{ $project->description}}</p>
+            <p class="py-2 text-lg text-gray-700"><b>ID of the user:</b> {{ $project->id}}</p>
+            <p class="py-2 text-lg text-gray-700"><b>Name:</b> {{ $project->name}}</p>
+            <p class="py-2 text-lg text-gray-700"><b>Description:</b> {{ $project->description}}</p>
+            <p class="py-2 text-lg text-gray-700"><b>Date Created:</b> {{ $project->created_at}}</p>
         </div>
         {{--        end content--}}
         @endsection
