@@ -13,7 +13,12 @@ class ActivitySeeder extends Seeder
      */
     public function run(): void
     {
-        Activity::factory()->times(20)->create();
-
-    }
+        // Seed activities
+        Activity::insert([
+            ['name' => 'Todo'],
+            ['name' => 'Doing'],
+            ['name' => 'Testing'],
+            ['name' => 'Verify'],
+            ['name' => 'Done'],
+        ]);    }
 }

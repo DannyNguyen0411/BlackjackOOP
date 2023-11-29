@@ -2,7 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Activity;
+use App\Models\Project;
 use App\Models\Task;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,7 +16,10 @@ class TaskSeeder extends Seeder
      */
     public function run(): void
     {
-        Task::factory()->times(20)->create();
-
+        Task::factory()->count(10)->create([
+            'activity_id' => Activity::inRandomOrder()->first()->id,
+            'project_id' => Project::inRandomOrder()->first()->id,
+            'user_id' => User::inRandomOrder()->first()->id,
+        ]);
     }
 }
