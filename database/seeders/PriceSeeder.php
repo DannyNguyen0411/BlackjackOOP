@@ -1,10 +1,10 @@
 <?php
 
-namespace Database\Seeders\video_laravel;
+namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 
-class ProductSeeder extends Seeder
+class  TakPriceSeeder extends Seeder
 {
     /**
      * Run the database seeds.
